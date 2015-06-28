@@ -1,7 +1,6 @@
 (function(window) {
 
   var encoderMp3Worker = new Worker('js/enc/mp3/mp3Worker.js');
-  var uploadWorker = new Worker('js/up/uploadWorker.js');
 
   var Recorder = function(source) {
 
@@ -9,6 +8,7 @@
     var recording = false;
 
     this.Recordings = {};
+    this.userName = null;
     this.userEmail = null;
     this.storyTitle = null;
     this.currentRecording = null;
@@ -117,7 +117,7 @@
           console.log("LOGGEDIN");
           var Story = Parse.Object.extend("Story");
           var storyObject = new Story();
-            storyObject.save({audioUrl: audioRecorder.currentRecordingFileName, storyTitle: audioRecorder.storyTitle, userEmail: audioRecorder.userEmail}, {
+            storyObject.save({audioUrl: audioRecorder.currentRecordingFileName, storyTitle: audioRecorder.storyTitle, userEmail: audioRecorder.userEmail, userName: audioRecorder.userName}, {
             success: function(object) {
               if (callback) {
                 callback('success', object);

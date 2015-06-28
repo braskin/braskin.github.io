@@ -47,7 +47,7 @@
 <section class="container-fluid" id="section1">
 
     <!-- submit Info section --> 
-    <div class="v-center step submit" id="info" style="display:none">
+    <div class="v-center step submit" id="info" style="display:block">
         <h1 class="text-center">Record Your Story</h1>
         <div class="row">
             <div class="lato centered-list center-block">
@@ -66,17 +66,17 @@
             <div class="lato centered-list center-block">
                 <div class="form-group">
                     <div class="input-group input-group-lg">
-                      <input type="text" class="form-control" placeholder="Your first & last name" aria-describedby="basic-addon1" size="50">
+                      <input type="text" class="form-control" id="userName" placeholder="Your first & last name" aria-describedby="basic-addon1" size="50">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="input-group input-group-lg">
-                        <input type="text" class="form-control" placeholder="Email address" aria-describedby="basic-addon1" size="50">
+                        <input type="text" class="form-control" id="userEmail" placeholder="Email address" aria-describedby="basic-addon1" size="50">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="input-group input-group-lg">
-                      <input type="text" class="form-control" placeholder="Story Title" aria-describedby="basic-addon1" size="50">
+                      <input type="text" class="form-control" id="storyTitle" placeholder="Story Title" aria-describedby="basic-addon1" size="50">
                     </div>
                 </div>
             </div>
@@ -93,15 +93,17 @@
 
     <!-- Countdown Section -->    
     <div class="v-center step" id="record">
-        <h3 class="text-center">Hi Jane Goodall</h3>
+        <h3 class="text-center" id="greeting">Hi Jane Goodall</h3>
         <h1 class="text-center">Time to Tell Your Story</h1>
         <div class="row">
             <div class="lato centered-list center-block">
                 <div class="lato centered-list2 center-block">
                     <div class="countdown">
-                        <div id="3">3</div>
-                        <div id="2">2</div>
-                        <div id="1">1</div>
+                        <div id="4">3</div>
+                        <div id="3">2</div>
+                        <div id="2">1</div>
+                        <div id="1">Let's get started</div>
+
                     </div>
                 </div>   
             </div>
@@ -110,7 +112,7 @@
 
 
     <!-- Record Section -->    
-    <div class="v-center step" id="timer-levels" style="display:block">
+    <div class="v-center step" id="timer-levels" style="display:none">
         <h3 class="text-center">Hi Jane Goodall</h3>
         <img src="img\counter.png"  class="text-center test-image">
         <img class="test-image" src="img/levels.png">
@@ -124,7 +126,44 @@
             </div>
         </div>
     </div>
+
+    <div id="verify" class="v-center step" style="display: none;">
+      <div class="col-md-6 col-md-offset-3">
+        <h1>Verify</h1>
+        <ul id="recordingslist"></ul>
+        <br>
+        <button  class="btn btn-default" onclick="submitAll();">Submit</button>
+        <br>
+        <button  class="btn btn-default" onclick="reRecord();">Record Again</button>
+
+      </div>
+    </div>
+
+
+  <div id="upload" class="row step" style="display: none;">
+    <div class="col-md-6 col-md-offset-3">
+      <h1>Uploading...</h1><br>
+<img class="center-block" style="-webkit-user-select: none; cursor: zoom-in;" src="http://www.mytreedb.com/uploads/mytreedb/loader/ajax_loader_red_512.gif" width="300" height="300">
+    </div>
+  </div>
+
+  <div id="confirm" class="row step" style="display: none;">
+    <div class="col-md-6 col-md-offset-3">
+      <h1>Confirm</h1>
+      <p>Story submitted!</p>
+    </div>
+  </div>
+
+
+
 </section>
+
+  <div id="logger" class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <h2>Log</h2>
+      <pre id="log"></pre>
+    </div>
+  </div>
 
 
 <script>
@@ -153,20 +192,23 @@
     button.nextElementSibling.disabled = false;
     logHTML('Recording...');
   }
+
   function stopRecording(button) {
     if(!audioRecorder)
       return;
     audioRecorder && audioRecorder.stop();
     //GUI
-    button.disabled = true;
-    button.previousElementSibling.disabled = false;
+    // button.disabled = true;
+    // button.previousElementSibling.disabled = false;
     logHTML('Stopped recording.');
     stepToStep("verify");
   }
+
   function reRecord(e) {
     $(recordingslist).empty();
-    stepToStep("record");    
+    startRecordCountdown();
   }
+
   function submitAll(e) {
     logHTML('Submitting.');
     audioRecorder.uploadAudioToStorage(function() {
@@ -183,6 +225,10 @@
   function submitInfo(e) {
     audioRecorder.userEmail = $("#userEmail").val();
     audioRecorder.storyTitle = $("#storyTitle").val();
+    audioRecorder.userName = $("#userName").val();
+
+    $("#greeting").text("Hi " + audioRecorder.userName);
+
     stepToStep("record");
   }
   function stepToStep(step) {
