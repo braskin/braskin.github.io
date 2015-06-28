@@ -1,0 +1,6 @@
+.new {
+	color:red;
+}
+
+.new > div {
+	display: none;
