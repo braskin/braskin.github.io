@@ -18,6 +18,7 @@
     </script>
     <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.4.2.min.js"></script>
     <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/flipclock.css">
   </head>
 
 
@@ -93,7 +94,7 @@
     </div>
 
     <!-- Countdown Section -->    
-    <div class="v-center step" id="record" style="display:none">
+    <div class="v-center step" id="countdown" style="display:none">
         <h3 class="text-center" id="greeting">Hi Jane Goodall</h3>
         <h1 class="text-center">Time to Tell Your Story</h1>
         <div class="row">
@@ -113,12 +114,10 @@
 
 
     <!-- Record Section -->    
-    <div class="v-center step" id="timer-levels" style="display:none">
+    <div class="v-center step" id="record" style="display:none">
         <h3 class="text-center">Hi Jane Goodall</h3>
-        <img src="img/counter.png"  class="text-center test-image">
-        <img class="test-image" src="img/levels.png">
+        <div class="countdown"></div>
         <div id="visualizer" style="text-align: center;"></div>
-
         <div class="row">
             <div class="lato centered-list center-block">
                 <div class="lato centered-list2 center-block">
@@ -199,11 +198,15 @@
   var audioContext;
   var audioRecorder;
   var _realAudioInput;
+  var _realStream;
   var wavesurfer;
+  var microphone;
+  var visualizer;
   function handlerStartUserMedia(stream) {
     console.log('handlerStartUserMedia');
     console.log('sampleRate:'+ audioContext.sampleRate);
     // MEDIA STREAM SOURCE -> ZERO GAIN >
+    _realStream = stream;
     _realAudioInput = audioContext.createMediaStreamSource(stream);
     audioRecorder = new Recorder(_realAudioInput);
   }
@@ -211,17 +214,37 @@
       logHTML('No live audio input: ' + e);
   }
   function startRecording(button) {
+    console.log('in startRecording');
     if(!audioRecorder)
       return;
 
     console.log("HERE");
-    var microphone = Object.create(WaveSurfer.Microphone);
-    microphone.init({
-        wavesurfer: wavesurfer
+    if (!visualizer) {
+      visualizer = Object.create(WaveSurfer);
+      visualizer.init({
+          container: '#visualizer',
+          waveColor: 'blue',
+          interact: false,
+          cursorWidth: 0,
+//          fillParent: true,
+          minPxPerSec: 10
+      });
+
+      microphone = Object.create(WaveSurfer.Microphone);
+      microphone.init({
+          wavesurfer: visualizer
+      });
+
+      micro = microphone;
+
+      microphone.gotStream(_realStream);
+    }
+    var clock = $('.countdown').FlipClock(900, {
+      countdown: true,
+      clockFace: 'MinuteCounter'
     });
+
     console.log("HERE");
-
-
 
     audioRecorder && audioRecorder.record();
     //GUI
@@ -288,8 +311,8 @@
 
   function fadeCascade(current_count) {
     if (current_count == 0) {
-      audioRecorder.record();
-      stepToStep('timer-levels');
+      startRecording();
+      stepToStep('record');
     } else {
       $("#"+current_count).fadeIn("slow", function() {
         $("#"+current_count).fadeOut("slow", function() {
@@ -300,7 +323,7 @@
   }
 
   function startRecordCountdown() {
-    stepToStep('record');
+    stepToStep('countdown');
     fadeCascade(4); 
   }
 
@@ -339,5 +362,7 @@
 
 <script src="js/recorder.js"></script>
 <script src="js/wavesurfer.min.js"></script>
+<script src="js/wavesurfer.microphone.min.js"></script>
+<script src="js/flipclock.min.js"></script>
 </body>
 
