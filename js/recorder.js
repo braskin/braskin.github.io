@@ -194,8 +194,6 @@
 
       console.log("Calling wavesurfer loadblob");
 
-      console.log("URL: ");
-      console.log(url);
       wavesurfer.load(url);
 
       console.log("After Calling wavesurfer loadblob");

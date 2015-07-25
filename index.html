@@ -117,6 +117,8 @@
         <h3 class="text-center">Hi Jane Goodall</h3>
         <img src="img/counter.png"  class="text-center test-image">
         <img class="test-image" src="img/levels.png">
+        <div id="wave" style="text-align: center;"></div>
+
         <div class="row">
             <div class="lato centered-list center-block">
                 <div class="lato centered-list2 center-block">
@@ -167,7 +169,7 @@
   <div id="upload" class="row step" style="display: none;">
     <div class="col-md-6 col-md-offset-3">
       <h1>Uploading...</h1><br>
-<img class="center-block" style="-webkit-user-select: none; cursor: zoom-in;" src="http://www.mytreedb.com/uploads/mytreedb/loader/ajax_loader_red_512.gif" width="300" height="300">
+<img class="center-block" style="-webkit-user-select: none; cursor: zoom-in;" src="/img/ajax_loader_red_512.gif" width="300" height="300">
     </div>
   </div>
 
@@ -252,6 +254,7 @@
     });
     stepToStep("upload");        
   }
+  
   function submitInfo(e) {
     if (!audioRecorder) {
       console.log("NO AUDIO RECORDER");
@@ -265,11 +268,33 @@
       startRecordCountdown();
     }
   }
+
   function stepToStep(step) {
     logHTML("Stepping to step: " + step);
     $(".step").hide();
     $("#"+step).show();
   }
+
+
+  function fadeCascade(current_count) {
+    if (current_count == 0) {
+      audioRecorder.record();
+      stepToStep('timer-levels');
+    } else {
+      $("#"+current_count).fadeIn("slow", function() {
+        $("#"+current_count).fadeOut("slow", function() {
+          fadeCascade(current_count-1);
+        });
+      });
+    }
+  }
+
+  function startRecordCountdown() {
+    stepToStep('record');
+    fadeCascade(4); 
+  }
+
+
   window.onload = function init() {
     try {
       // webkit shim.
