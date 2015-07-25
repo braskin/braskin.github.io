@@ -180,35 +180,34 @@
       console.log("the blob " + blob + " " + blob.size + " " + blob.type);
 
       var url = URL.createObjectURL(blob);
-      var li = document.createElement('li');
-      var hf = document.createElement('a');
-      hf.href = url;
-      hf.download = new Date().toISOString() + '.' + extension;
-      hf.innerHTML = hf.download;
-      li.appendChild(hf);
+      // var li = document.createElement('li');
+      // var hf = document.createElement('a');
+      // hf.href = url;
+      // hf.download = new Date().toISOString() + '.' + extension;
+      // hf.innerHTML = hf.download;
+      // li.appendChild(hf);
 
       console.log(audioRecorder.Recordings);
-      audioRecorder.Recordings[hf.download] = blob;
+      // audioRecorder.Recordings[hf.download] = blob;
       audioRecorder.currentRecording = blob;
-      audioRecorder.currentRecordingFileName = hf.download;
+      audioRecorder.currentRecordingFileName = new Date().toISOString() + '.' + extension;
 
       console.log("Calling wavesurfer loadblob");
 
       console.log("URL: ");
       console.log(url);
-//      wavesurfer.loadBlob(url);
       wavesurfer.load(url);
 
       console.log("After Calling wavesurfer loadblob");
 
 
-      var au = document.createElement('audio');
-      au.controls = true;
-      au.src = url;
-      audioRecorder.player = au;
-      li.appendChild(au);
+      // var au = document.createElement('audio');
+      // au.controls = true;
+      // au.src = url;
+      // audioRecorder.player = au;
+      // li.appendChild(au);
 
-      recordingslist.appendChild(li);
+      // recordingslist.appendChild(li);
     }
   };
 

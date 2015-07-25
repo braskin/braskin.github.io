@@ -145,15 +145,21 @@
                 <i class="glyphicon glyphicon-record"></i>
                 Record Again
             </button>     
+
+            <button class="btn btn-primary" data-action="record" onclick="submitAll();">
+                <i class="glyphicon glyphicon-ok"></i>
+                Upload & Submit
+            </button>     
+
           </div>
         </div>
 
         <ul id="recordingslist"></ul>
         <br>
-        <button  class="btn btn-default" onclick="submitAll();">Submit</button>
+<!--         <button  class="btn btn-default" onclick="submitAll();">Submit</button>
         <br>
         <button  class="btn btn-default" onclick="reRecord();">Record Again</button>
-
+ -->
       </div>
     </div>
 
@@ -247,13 +253,17 @@
     stepToStep("upload");        
   }
   function submitInfo(e) {
-    audioRecorder.userEmail = $("#userEmail").val();
-    audioRecorder.storyTitle = $("#storyTitle").val();
-    audioRecorder.userName = $("#userName").val();
+    if (!audioRecorder) {
+      console.log("NO AUDIO RECORDER");
+    } else {
+      audioRecorder.userEmail = $("#userEmail").val();
+      audioRecorder.storyTitle = $("#storyTitle").val();
+      audioRecorder.userName = $("#userName").val();
 
-    $("#greeting").text("Hi " + audioRecorder.userName);
-
-    stepToStep("record");
+      $("#greeting").text("Hi " + audioRecorder.userName);
+      stepToStep("record");
+      startRecordCountdown();
+    }
   }
   function stepToStep(step) {
     logHTML("Stepping to step: " + step);

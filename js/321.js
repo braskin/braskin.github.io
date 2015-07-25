@@ -16,8 +16,3 @@ function startRecordCountdown() {
 	stepToStep('record');
 	fadeCascade(4);	
 }
-
-
-$(".record-your-story").click(function() {
-	startRecordCountdown()
-});
