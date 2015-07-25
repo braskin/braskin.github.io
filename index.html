@@ -213,10 +213,20 @@
   function startRecording(button) {
     if(!audioRecorder)
       return;
+
+    console.log("HERE");
+    var microphone = Object.create(WaveSurfer.Microphone);
+    microphone.init({
+        wavesurfer: wavesurfer
+    });
+    console.log("HERE");
+
+
+
     audioRecorder && audioRecorder.record();
     //GUI
-    button.disabled = true;
-    button.nextElementSibling.disabled = false;
+    // button.disabled = true;
+    // button.nextElementSibling.disabled = false;
     logHTML('Recording...');
   }
 
@@ -254,7 +264,7 @@
     });
     stepToStep("upload");        
   }
-  
+
   function submitInfo(e) {
     if (!audioRecorder) {
       console.log("NO AUDIO RECORDER");
@@ -317,7 +327,7 @@
     } catch (e) {
      alert('No web audio support in this browser!');
     }
-    navigator.getUserMedia({vide:false, audio: true}, handlerStartUserMedia, handlerErrorUserMedia);
+    navigator.getUserMedia({video:false, audio: true}, handlerStartUserMedia, handlerErrorUserMedia);
   };
 
   </script>
