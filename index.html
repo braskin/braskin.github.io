@@ -1,57 +1,144 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>Record/Encode Audio</title>
-
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"> 
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css"> 
-
-  <style type='text/css'>
-    body{ padding: 15px; margin: 15px;}
+ <head>
+    <meta charset="utf-8">
+    <title>Section scroller one-page template</title>
+    <meta name="description" content="recorder app" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Codeply">
     
-  </style>
-<script src="https://sdk.amazonaws.com/js/aws-sdk-2.1.32.min.js"></script>
-<script type="text/javascript">
-  // See the Configuring section to configure credentials in the SDK
-  AWS.config.update({accessKeyId: 'AKIAIYAMUFYEPYZNLLCQ', secretAccessKey: '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'});
-  AWS.config.region = 'us-east-1';
-</script>
-<script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.4.2.min.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" rel="stylesheet" />
+    
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.1.32.min.js"></script>
+    <script type="text/javascript">
+      // See the Configuring section to configure credentials in the SDK
+      AWS.config.update({accessKeyId: 'AKIAIYAMUFYEPYZNLLCQ', secretAccessKey: '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'});
+      AWS.config.region = 'us-east-1';
+    </script>
+    <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.4.2.min.js"></script>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
 
-</head>
+
 <body>
-  <div id="info" class="row step">
-    <div class="col-md-6 col-md-offset-3">
-      <h1>Input Details</h1>
-      Story Title: <input type="text" name="storyTitle" id="storyTitle" class="form-control" size="50"><br>
-      Your Email: <input type="text" name="userEmail" id="userEmail" class="form-control" size="50"><br>
-      <button type="button" class="btn btn-default btn-lg center-block" onclick="submitInfo()" style="color:red">
-        <span class="glyphicon glyphicon-record" aria-hidden="true"></span> Record
-      </button>
 
+<!-- Header Navigation bar -->    
+<nav class="navbar navbar-trans navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapsible">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand text-danger" href="#">StorySlam</a>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar-collapsible">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#" data-toggle="modal" data-target="#myModal"><i class="fa fa-heart-o fa-lg"></i></a></li>
+            </ul>
+        </div>
     </div>
-  </div>
+</nav>
 
-  <div id="record" class="row step" style="display: none;">
-    <div class="col-md-6 col-md-offset-3">
-      <h1>Record</h1>
-      <button  class="btn btn-default" onclick="startRecording(this);">Record</button>
-      <button  class="btn btn-default"  onclick="stopRecording(this);" disabled>Stop</button>
+
+
+<section class="container-fluid" id="section1">
+
+    <!-- submit Info section --> 
+    <div class="v-center step submit" id="info" style="display:block">
+        <h1 class="text-center">Record Your Story</h1>
+        <div class="row">
+            <div class="lato centered-list center-block">
+                 <div class="lato centered-list2 center-block">
+                    <ol class="">
+                        <li class="instructions">Add your Details</li>
+                        <li class="instructions">Click the Record</li>
+                        <li class="instructions">Tell Your Story</li>
+                    </ol>
+                 </div>   
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="lato centered-list center-block">
+                <div class="form-group">
+                    <div class="input-group input-group-lg">
+                      <input type="text" class="form-control" id="userName" placeholder="Your first & last name" aria-describedby="basic-addon1" size="50">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group input-group-lg">
+                        <input type="text" class="form-control" id="userEmail" placeholder="Email address" aria-describedby="basic-addon1" size="50">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group input-group-lg">
+                      <input type="text" class="form-control" id="storyTitle" placeholder="Story Title" aria-describedby="basic-addon1" size="50">
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="row">
+            <div class="lato centered-list center-block">    
+                <button type="button" class="btn btn-danger btn-lg btn-huge latocenter-block lato center-block record-your-story" onclick="submitInfo()">
+                    <i class="fa fa-microphone fa-circle"></i> Record Your Story
+                </button>
+            </div>
+        </div>
     </div>
-  </div>
 
-  <div id="verify" class="row step" style="display: none;">
-    <div class="col-md-6 col-md-offset-3">
-      <h1>Verify</h1>
-      <ul id="recordingslist"></ul>
-      <br>
-      <button  class="btn btn-default" onclick="submitAll();">Submit</button>
-      <br>
-      <button  class="btn btn-default" onclick="reRecord();">Record Again</button>
+    <!-- Countdown Section -->    
+    <div class="v-center step" id="record">
+        <h3 class="text-center" id="greeting">Hi Jane Goodall</h3>
+        <h1 class="text-center">Time to Tell Your Story</h1>
+        <div class="row">
+            <div class="lato centered-list center-block">
+                <div class="lato centered-list2 center-block">
+                    <div class="countdown">
+                        <div id="4">3</div>
+                        <div id="3">2</div>
+                        <div id="2">1</div>
+                        <div id="1">Let's get started</div>
 
+                    </div>
+                </div>   
+            </div>
+        </div>
     </div>
-  </div>
+
+
+    <!-- Record Section -->    
+    <div class="v-center step" id="timer-levels" style="display:none">
+        <h3 class="text-center">Hi Jane Goodall</h3>
+        <img src="img\counter.png"  class="text-center test-image">
+        <img class="test-image" src="img/levels.png">
+        <div class="row">
+            <div class="lato centered-list center-block">
+                <div class="lato centered-list2 center-block">
+                   <button type="button" class="btn btn-danger btn-lg btn-huge latocenter-block lato center-block " onclick="stopRecording(this);">
+                      <i class="fa fa-stop fa-circle"></i> Stop
+                    </button>
+                </div>   
+            </div>
+        </div>
+    </div>
+
+    <div id="verify" class="v-center step" style="display: none;">
+      <div class="col-md-6 col-md-offset-3">
+        <h1>Verify</h1>
+        <ul id="recordingslist"></ul>
+        <br>
+        <button  class="btn btn-default" onclick="submitAll();">Submit</button>
+        <br>
+        <button  class="btn btn-default" onclick="reRecord();">Record Again</button>
+
+      </div>
+    </div>
+
 
   <div id="upload" class="row step" style="display: none;">
     <div class="col-md-6 col-md-offset-3">
@@ -69,6 +156,8 @@
 
 
 
+</section>
+
   <div id="logger" class="row">
     <div class="col-md-6 col-md-offset-3">
       <h2>Log</h2>
@@ -76,35 +165,28 @@
     </div>
   </div>
 
-  <script>
 
+<script>
   function logHTML(e, data) {
     log.innerHTML += "\n" + e + " " + (data || '');
   }
-
   var audioContext;
   var audioRecorder;
-
   var _realAudioInput;
-
   function handlerStartUserMedia(stream) {
     console.log('handlerStartUserMedia');
     console.log('sampleRate:'+ audioContext.sampleRate);
-
     // MEDIA STREAM SOURCE -> ZERO GAIN >
     _realAudioInput = audioContext.createMediaStreamSource(stream);
     audioRecorder = new Recorder(_realAudioInput);
   }
-
   function handlerErrorUserMedia(e) {
       logHTML('No live audio input: ' + e);
   }
-
   function startRecording(button) {
     if(!audioRecorder)
       return;
     audioRecorder && audioRecorder.record();
-
     //GUI
     button.disabled = true;
     button.nextElementSibling.disabled = false;
@@ -114,19 +196,17 @@
   function stopRecording(button) {
     if(!audioRecorder)
       return;
-
     audioRecorder && audioRecorder.stop();
-
     //GUI
-    button.disabled = true;
-    button.previousElementSibling.disabled = false;
+    // button.disabled = true;
+    // button.previousElementSibling.disabled = false;
     logHTML('Stopped recording.');
     stepToStep("verify");
   }
 
   function reRecord(e) {
     $(recordingslist).empty();
-    stepToStep("record");    
+    startRecordCountdown();
   }
 
   function submitAll(e) {
@@ -140,24 +220,23 @@
         stepToStep("confirm");
       })
     });
-
     stepToStep("upload");        
   }
-
   function submitInfo(e) {
     audioRecorder.userEmail = $("#userEmail").val();
     audioRecorder.storyTitle = $("#storyTitle").val();
+    audioRecorder.userName = $("#userName").val();
+
+    $("#greeting").text("Hi " + audioRecorder.userName);
+
     stepToStep("record");
   }
-
   function stepToStep(step) {
     logHTML("Stepping to step: " + step);
     $(".step").hide();
     $("#"+step).show();
   }
-
   window.onload = function init() {
-
     try {
       // webkit shim.
       window.AudioContext = window.AudioContext || window.webkitAudioContext || window.mozAudioContext;
@@ -169,16 +248,18 @@
     } catch (e) {
      alert('No web audio support in this browser!');
     }
-
     navigator.getUserMedia({vide:false, audio: true}, handlerStartUserMedia, handlerErrorUserMedia);
   };
 
+
   </script>
 
-   <script src="js/vendor/jquery-1.11.0.min.js"></script>  
-   <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
-  <script src="js/recorder.js"></script>
 
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>   
+
+<script src="js/recorder.js"></script>
+<script src="js/321.js"></script>
 </body>
-</html>
+
