@@ -13,6 +13,7 @@
     this.storyTitle = null;
     this.currentRecording = null;
     this.currentRecordingFileName = null;
+    this.player = null;
 
     this.context = source.context;
 
@@ -29,6 +30,7 @@
       if (!recording)
         return;
 
+      (e.inputBuffer);
       var channelLeft = e.inputBuffer.getChannelData(0);
 
       console.log('onAudioProcess' + channelLeft.length);
@@ -70,6 +72,7 @@
 
       if (!recording)
         return;
+
 
       encoderMp3Worker.postMessage({
         command: 'finish'
@@ -153,6 +156,7 @@
           var buf = e.data.buf;
           console.log('Receiving data from mp3-Encoder');
 
+
           //maybe you want to send to websocket channel, as:
           //https://github.com/akrennmair/speech-to-server
 
@@ -188,9 +192,20 @@
       audioRecorder.currentRecording = blob;
       audioRecorder.currentRecordingFileName = hf.download;
 
+      console.log("Calling wavesurfer loadblob");
+
+      console.log("URL: ");
+      console.log(url);
+//      wavesurfer.loadBlob(url);
+      wavesurfer.load(url);
+
+      console.log("After Calling wavesurfer loadblob");
+
+
       var au = document.createElement('audio');
       au.controls = true;
       au.src = url;
+      audioRecorder.player = au;
       li.appendChild(au);
 
       recordingslist.appendChild(li);

@@ -48,7 +48,7 @@
 <section class="container-fluid" id="section1">
 
     <!-- submit Info section --> 
-    <div class="v-center step submit" id="info" style="display:block">
+    <div class="v-center step submit" id="info" style="display:block;">
         <h1 class="text-center">Record Your Story</h1>
         <div class="row">
             <div class="lato centered-list center-block">
@@ -93,7 +93,7 @@
     </div>
 
     <!-- Countdown Section -->    
-    <div class="v-center step" id="record">
+    <div class="v-center step" id="record" style="display:none">
         <h3 class="text-center" id="greeting">Hi Jane Goodall</h3>
         <h1 class="text-center">Time to Tell Your Story</h1>
         <div class="row">
@@ -128,11 +128,25 @@
         </div>
     </div>
 
-    <div id="verify" class="v-center step" style="display: none;">
+    <div id="verify" class="v-center step" style="display:none;">
       <div class="col-md-6 col-md-offset-3">
         <h1>Verify</h1>
-        <div id="wave"></div>
-
+        <div id="player">
+          <div id="wave" style="text-align: center;"></div>
+          <div class="controls" style="text-align: center;">
+            <button class="btn btn-primary" data-action="play" onclick="playAudio(this);">
+                <i class="glyphicon glyphicon-play"></i>
+                Play
+                /
+                <i class="glyphicon glyphicon-pause"></i>
+                Pause
+            </button>        
+            <button class="btn btn-primary" data-action="record" onclick="reRecord();">
+                <i class="glyphicon glyphicon-record"></i>
+                Record Again
+            </button>     
+          </div>
+        </div>
 
         <ul id="recordingslist"></ul>
         <br>
@@ -203,11 +217,9 @@
       return;
     audioRecorder && audioRecorder.stop();
     //GUI
-    // button.disabled = true;
-    // button.previousElementSibling.disabled = false;
     logHTML('Stopped recording.');
     logHTML('Loading visualization.');
-    wavesurfer.loadBlob(audioRecorder.currentRecording);
+    // wavesurfer.loadBlob(audioRecorder.currentRecording);
   
     stepToStep("verify");
   }
@@ -215,6 +227,10 @@
   function reRecord(e) {
     $(recordingslist).empty();
     startRecordCountdown();
+  }
+
+  function playAudio(button) {
+    wavesurfer.playPause.bind(wavesurfer)();
   }
 
   function submitAll(e) {
@@ -256,8 +272,11 @@
       wavesurfer = Object.create(WaveSurfer);
       wavesurfer.init({
           container: '#wave',
-          waveColor: 'violet',
-          progressColor: 'purple'
+          waveColor: 'green',
+          progressColor: 'blue',
+          cursorWidth: 3,
+          cursorColor: 'white',
+          fillParent: true
       });
 
     } catch (e) {
@@ -265,7 +284,6 @@
     }
     navigator.getUserMedia({vide:false, audio: true}, handlerStartUserMedia, handlerErrorUserMedia);
   };
-
 
   </script>
 
