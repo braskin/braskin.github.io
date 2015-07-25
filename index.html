@@ -177,6 +177,7 @@
   var audioContext;
   var audioRecorder;
   var _realAudioInput;
+  var wavesurfer;
   function handlerStartUserMedia(stream) {
     console.log('handlerStartUserMedia');
     console.log('sampleRate:'+ audioContext.sampleRate);
@@ -252,7 +253,7 @@
       audioContext = new AudioContext;
       logHTML('Audio context set up.');
       logHTML('navigator.getUserMedia ' + (navigator.getUserMedia ? 'available.' : 'not present!'));
-      var wavesurfer = Object.create(WaveSurfer);
+      wavesurfer = Object.create(WaveSurfer);
       wavesurfer.init({
           container: '#wave',
           waveColor: 'violet',
