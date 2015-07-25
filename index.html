@@ -103,7 +103,7 @@
                         <div id="4">3</div>
                         <div id="3">2</div>
                         <div id="2">1</div>
-                        <div id="1">Let's get started</div>
+                        <div id="1">Begin!</div>
 
                     </div>
                 </div>   
@@ -131,6 +131,9 @@
     <div id="verify" class="v-center step" style="display: none;">
       <div class="col-md-6 col-md-offset-3">
         <h1>Verify</h1>
+        <div id="wave"></div>
+
+
         <ul id="recordingslist"></ul>
         <br>
         <button  class="btn btn-default" onclick="submitAll();">Submit</button>
@@ -246,6 +249,13 @@
       audioContext = new AudioContext;
       logHTML('Audio context set up.');
       logHTML('navigator.getUserMedia ' + (navigator.getUserMedia ? 'available.' : 'not present!'));
+      var wavesurfer = Object.create(WaveSurfer);
+      wavesurfer.init({
+          container: '#wave',
+          waveColor: 'violet',
+          progressColor: 'purple'
+      });
+
     } catch (e) {
      alert('No web audio support in this browser!');
     }
@@ -261,6 +271,7 @@
 <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>   
 
 <script src="js/recorder.js"></script>
+<script src="js/wavesurfer.min.js"></script>
 <script src="js/321.js"></script>
 </body>
 
