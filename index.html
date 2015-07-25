@@ -116,7 +116,7 @@
     <!-- Record Section -->    
     <div class="v-center step" id="record" style="display:none">
         <h3 class="text-center">Hi Jane Goodall</h3>
-        <div class="countdown"></div>
+        <div class="record_countdown"></div>
         <div id="visualizer" style="text-align: center;"></div>
         <div class="row">
             <div class="lato centered-list center-block">
@@ -226,7 +226,6 @@
           waveColor: 'blue',
           interact: false,
           cursorWidth: 0,
-//          fillParent: true,
           minPxPerSec: 10
       });
 
@@ -239,7 +238,7 @@
 
       microphone.gotStream(_realStream);
     }
-    var clock = $('.countdown').FlipClock(900, {
+    var clock = $('.record_countdown').FlipClock(900, {
       countdown: true,
       clockFace: 'MinuteCounter'
     });
@@ -297,7 +296,6 @@
       audioRecorder.userName = $("#userName").val();
 
       $("#greeting").text("Hi " + audioRecorder.userName);
-      stepToStep("record");
       startRecordCountdown();
     }
   }
