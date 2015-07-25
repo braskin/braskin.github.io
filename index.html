@@ -205,6 +205,9 @@
     // button.disabled = true;
     // button.previousElementSibling.disabled = false;
     logHTML('Stopped recording.');
+    logHTML('Loading visualization.');
+    wavesurfer.loadBlob(audioRecorder.currentRecording);
+  
     stepToStep("verify");
   }
 
@@ -221,7 +224,6 @@
         logHTML('Stored new story.');
         console.log(status);
         console.log(object);
-        wavesurfer.loadBlob(audioRecorder.currentRecording);
         stepToStep("confirm");
       })
     });
