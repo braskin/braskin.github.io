@@ -221,6 +221,7 @@
         logHTML('Stored new story.');
         console.log(status);
         console.log(object);
+        wavesurfer.loadBlob(audioRecorder.currentRecording);
         stepToStep("confirm");
       })
     });
