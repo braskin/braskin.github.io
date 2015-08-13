@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
     <link href="http://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" rel="stylesheet" />
+    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
     
     <script src="https://sdk.amazonaws.com/js/aws-sdk-2.1.32.min.js"></script>
     <script type="text/javascript">
@@ -17,8 +18,9 @@
       AWS.config.region = 'us-east-1';
     </script>
     <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.4.2.min.js"></script>
-    <link rel="stylesheet" href="css/styles.css" />
     <link rel="stylesheet" href="css/flipclock.css">
+    <link rel="stylesheet" href="css/styles.css" />
+    
   </head>
 
 
@@ -56,7 +58,7 @@
                  <div class="lato centered-list2 center-block">
                     <ol class="">
                         <li class="instructions">Add your Details</li>
-                        <li class="instructions">Click the Record</li>
+                        <li class="instructions">Click Record</li>
                         <li class="instructions">Tell Your Story</li>
                     </ol>
                  </div>   
@@ -104,8 +106,7 @@
                         <div id="4">3</div>
                         <div id="3">2</div>
                         <div id="2">1</div>
-                        <div id="1">Begin!</div>
-
+                        <div class="Start"id="1">Begin</div>
                     </div>
                 </div>   
             </div>
@@ -115,13 +116,27 @@
 
     <!-- Record Section -->    
     <div class="v-center step" id="record" style="display:none">
-        <h3 class="text-center">Hi Jane Goodall</h3>
-        <div class="record_countdown"></div>
-        <div id="visualizer" style="text-align: center;"></div>
-        <div class="row">
+        <h1 class="text-center blink_me">Recording</h1>
+        <p class="descripter text-center">You can take up to 15 minutes to tell your story. Have Fun!</p>
+
+          <div class="container center-block">
+            <div class="row center-block">
+              <div class="col-md-4"></div>
+              <div class="record_countdown col-md-4 center-block"></div>
+              <div class="col-md-4"></div>
+            </div>
+          </div>
+
+          <div class="container center-block">
+            <div class="row center-block">
+               <div id="visualizer" style="text-align: center-block;"></div>
+            </div>
+          </div>
+
+         <div class="row">
             <div class="lato centered-list center-block">
                 <div class="lato centered-list2 center-block">
-                   <button type="button" class="btn btn-danger btn-lg btn-huge latocenter-block lato center-block " onclick="stopRecording(this);">
+                   <button type="button" class="btn btn-danger btn-lg btn-huge latocenter-block lato center-block verify-button" onclick="stopRecording(this);">
                       <i class="fa fa-stop fa-circle"></i> Stop
                     </button>
                 </div>   
@@ -129,28 +144,34 @@
         </div>
     </div>
 
+<!-- Verify Section --> 
+    
     <div id="verify" class="v-center step" style="display:none;">
       <div class="col-md-6 col-md-offset-3">
-        <h1>Verify</h1>
+        <h1 class="text-center">Review & Upload Your Story</h1>
         <div id="player">
           <div id="wave" style="text-align: center;"></div>
           <div class="controls" style="text-align: center;">
-            <button class="btn btn-primary" data-action="play" onclick="playAudio(this);">
-                <i class="glyphicon glyphicon-play"></i>
+            
+            <button class="btn btn-success btn-lg btn-huge latocenter-block lato center-block verify-button" data-action="play" onclick="playAudio(this);">
+                <i class="fa fa-play"></i>
                 Play
                 /
-                <i class="glyphicon glyphicon-pause"></i>
+                <i class="fa fa-pause"></i>
                 Pause
-            </button>        
-            <button class="btn btn-primary" data-action="record" onclick="reRecord();">
+            </button>
+
+            <button class="btn btn-primary btn-lg btn-huge latocenter-block lato center-block data-action verify-button" data-action="record" onclick="submitAll();">
+                <i class="fa fa-cloud-upload"></i>
+                Upload & Submit
+            </button>
+            
+            <div class="center-block or-you-can">Or you can ...</div>
+            
+            <button class="btn btn-danger btn-lg btn-huge latocenter-block lato center-block verify-button" data-action="record" onclick="reRecord();">
                 <i class="glyphicon glyphicon-record"></i>
                 Record Again
-            </button>     
-
-            <button class="btn btn-primary" data-action="record" onclick="submitAll();">
-                <i class="glyphicon glyphicon-ok"></i>
-                Upload & Submit
-            </button>     
+            </button>      
 
           </div>
         </div>
@@ -164,25 +185,46 @@
       </div>
     </div>
 
+<!-- Uploading Section --> 
 
-  <div id="upload" class="row step" style="display: none;">
+  <div id="upload" class="row v-center step" style="display: none;">
     <div class="col-md-6 col-md-offset-3">
-      <h1>Uploading...</h1><br>
-<img class="center-block" style="-webkit-user-select: none; cursor: zoom-in;" src="/img/ajax_loader_red_512.gif" width="300" height="300">
+      <h1 class="text-center">Uploading your Story</h1>
+      <p class="text-center descripter">This may take a couple minutes so please don't close your browser until you see our confirmation screen.</p>
+      <br>
+
+<!-- Fancy loader -->
+      <div id="loader">
+        <ul class="loader-ul">
+          <li class="loader-li"></li>
+          <li class="loader-li"></li>
+          <li class="loader-li"></li>
+          <li class="loader-li"></li>
+          <li class="loader-li"></li>
+          <li class="loader-li"></li>
+        </ul>
+      </div>
+<!-- End Fancy loader -->
+
     </div>
   </div>
 
-  <div id="confirm" class="row step" style="display: none;">
+
+<!-- Story Submitted Section --> 
+
+  <div id="confirm" class="v-center row step" style="display: none;">
     <div class="col-md-6 col-md-offset-3">
-      <h1>Confirm</h1>
-      <p>Story submitted!</p>
+      <h1 class="text-center">Story Submitted</h1>
+      <p class="text-center descripter">Congrats! Your story was submitted successfully. You can always be in touch with us at <a href="mailto:partners@storyslam.com">partners@storyslam.com.</a></p>
+      <img class="headphone img-responsive center-block" src="img/headphone-icon-small.png">
+
+
     </div>
   </div>
 
-
+<!-- Fucking Log Section --> 
 
 </section>
-
   <div id="logger" class="row">
     <div class="col-md-6 col-md-offset-3">
       <h2>Log</h2>
@@ -223,7 +265,7 @@
       visualizer = Object.create(WaveSurfer);
       visualizer.init({
           container: '#visualizer',
-          waveColor: 'blue',
+          waveColor: 'orange',
           interact: false,
           cursorWidth: 0,
           minPxPerSec: 10
@@ -338,8 +380,8 @@
       wavesurfer = Object.create(WaveSurfer);
       wavesurfer.init({
           container: '#wave',
-          waveColor: 'green',
-          progressColor: 'blue',
+          waveColor: 'yellow',
+          progressColor: 'green',
           cursorWidth: 3,
           cursorColor: 'white',
           fillParent: true

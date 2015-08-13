@@ -3,15 +3,16 @@
 
 html,body {
   height:100%;
-    background:center no-repeat fixed url('https://snap-photos.s3.amazonaws.com/img-thumbs/960w/BGRA0KYCD8.jpg');
+    background:center no-repeat fixed url('../img/background_walking.jpg');
     background-size: cover;
     color:#444;
-    font-family: 'Lato', sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 @media (min-width:768px) {
     h1 {
-        font-size:68px;
+        font-size:56px;
+        padding-bottom: 20px;
     }
 }
 
@@ -41,11 +42,11 @@ a:hover {
 }
 
 .lato {
-    font-family: 'Lato', sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .bitter {
-    font-family: 'Bitter', serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .icon-bar {
@@ -141,9 +142,9 @@ section {
 }
   
 #section1, #section3 {
-  background-color: rgba(0,0,0,0.7);
+  background-color: rgba(122, 195, 229, 0.39);
   color:#fff;
-  font-family: 'Bitter', serif;
+  font-family: 'Montserrat', sans-serif;
 }
   
 #section4 {
@@ -201,14 +202,15 @@ footer .nav>li>a:hover {
   text-align: left;
   font-size: 1.5em;
   line-height: 1.5em;
-  width:400px;
+  width:350px;
 }
 
 .centered-list2 {
   text-align: left;
-  font-size: 1.5em;
+  font-size: 1.25em;
   line-height: 1.5em;
   width:300px;
+  padding: 0 0 30px 15px;
 }
 
 .countdown {
@@ -233,3 +235,166 @@ footer .nav>li>a:hover {
     margin-right: auto;
     margin-bottom:30px;
 }
+
+#visualizer {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.verify-button {
+  width:260px
+}
+
+.or-you-can {
+  padding: 20px 0;
+  font-size:20px;
+}
+
+.btn-success {
+  margin-bottom: 10px;
+}
+
+.on-air {
+  color:red;
+}
+
+.descripter {
+  font-size: 1.5em;
+  line-height: 1.5em;
+  margin-bottom: 40px;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+   color: #484cb0;
+   font-weight: 600;
+}
+
+p, li, .or-you-can{
+    color:#c45d3e;
+}
+
+.headphone {
+  display:block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+
+/* Custom Loader CSS */
+
+#loader {
+  position: relative;
+  margin: 60px auto;
+  left: 0;
+  right: 0;
+  top: 50%;
+  width: 90px;
+}
+#loader ul {
+  margin: 0;
+  list-style: none;
+  width: 90px;
+  position: relative;
+  padding: 0;
+  height: 10px;
+}
+#loader ul li {
+  position: absolute;
+  width: 2px;
+  height: 0;
+  background-color: orange;
+  bottom: 0;
+}
+@keyframes sequence1 {
+  0% {
+    height: 10px;
+  }
+  50% {
+    height: 50px;
+  }
+  100% {
+    height: 10px;
+  }
+}
+@keyframes sequence2 {
+  0% {
+    height: 20px;
+  }
+  50% {
+    height: 65px;
+  }
+  100% {
+    height: 20px;
+  }
+}
+#loader li:nth-child(1) {
+  left: 0;
+  animation: sequence1 1s ease infinite 0;
+}
+#loader li:nth-child(2) {
+  left: 15px;
+  animation: sequence2 1s ease infinite 0.1s;
+}
+#loader li:nth-child(3) {
+  left: 30px;
+  animation: sequence1 1s ease-in-out infinite 0.2s;
+}
+#loader li:nth-child(4) {
+  left: 45px;
+  animation: sequence2 1s ease-in infinite 0.3s;
+}
+#loader li:nth-child(5) {
+  left: 60px;
+  animation: sequence1 1s ease-in-out infinite 0.4s;
+}
+#loader li:nth-child(6) {
+  left: 75px;
+  animation: sequence2 1s ease infinite 0.5s;
+}
+
+
+/* On Air Blinker CSS */
+
+
+.blink_me {
+
+    color:red;
+
+    -webkit-animation-name: blinker;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+    
+    -moz-animation-name: blinker;
+    -moz-animation-duration: 2s;
+    -moz-animation-timing-function: linear;
+    -moz-animation-iteration-count: infinite;
+    
+    animation-name: blinker;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@-moz-keyframes blinker {  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+}
+
+@-webkit-keyframes blinker {  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+}
+
+@keyframes blinker {  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+}
+
+
+
