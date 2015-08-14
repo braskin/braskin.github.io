@@ -34,6 +34,7 @@ a:hover {
 
 .text-danger, a.text-danger {
     color:#f44d3c;
+    font-family: 'Pacifico', cursive;
 }
 
 .btn-huge {
@@ -199,10 +200,10 @@ footer .nav>li>a:hover {
 
 
 .centered-list {
-  text-align: left;
+  text-align: center;
   font-size: 1.5em;
-  line-height: 1.5em;
-  width:350px;
+  line-height: normal;
+  width:100%;
 }
 
 .centered-list2 {
@@ -224,6 +225,14 @@ footer .nav>li>a:hover {
   margin-top: .3em;
 }
 
+.countdown > .begin {
+  font-size: 2em;
+
+}
+
+.begin {
+  font-size: 2em;
+}
 #record {
   display: none;
 
@@ -395,6 +404,4 @@ p, li, .or-you-can{
     50% { opacity: 0.0; }
     100% { opacity: 1.0; }
 }
-
-
 
