@@ -226,21 +226,13 @@
 <!-- Fucking Log Section --> 
 
 </section>
-<!--   <div id="logger" class="row">
-    <div class="col-md-6 col-md-offset-3">
-      <h2>Log</h2>
-      <pre id="log"></pre>
-    </div>
-  </div>
- -->
+
 
 <script>
-  function logHTML(e, data) {
-    console.log(e + " " + (data || ''));
-    // if ($("#log")) {
-    //   log.innerHTML += "\n" + e + " " + (data || '');
-    // }
-  }
+  // function logHTML(e, data) {
+//    log.innerHTML += "\n" + e + " " + (data || '');
+  // }
+
   var audioContext;
   var audioRecorder;
   var _realAudioInput;
@@ -257,7 +249,7 @@
     audioRecorder = new Recorder(_realAudioInput);
   }
   function handlerErrorUserMedia(e) {
-      logHTML('No live audio input: ' + e);
+    console.log("No live audio input");
   }
   function startRecording(button) {
     console.log('in startRecording');
@@ -292,10 +284,8 @@
     console.log("HERE");
 
     audioRecorder && audioRecorder.record();
-    //GUI
-    // button.disabled = true;
-    // button.nextElementSibling.disabled = false;
-    logHTML('Recording...');
+
+    console.log('Recording...');
   }
 
   function stopRecording(button) {
@@ -303,8 +293,8 @@
       return;
     audioRecorder && audioRecorder.stop();
     //GUI
-    logHTML('Stopped recording.');
-    logHTML('Loading visualization.');
+    console.log('Stopped recording.');
+    console.log('Loading visualization.');
     // wavesurfer.loadBlob(audioRecorder.currentRecording);
   
     stepToStep("verify");
@@ -320,11 +310,11 @@
   }
 
   function submitAll(e) {
-    logHTML('Submitting.');
+    console.log('Submitting.');
     audioRecorder.uploadAudioToStorage(function() {
-      logHTML('Uploaded to storage.');
+      console.log('Uploaded to storage.');
       audioRecorder.storeNewStory(function(status, object) {
-        logHTML('Stored new story.');
+        console.log('Stored new story.');
         console.log(status);
         console.log(object);
         stepToStep("confirm");
@@ -347,7 +337,7 @@
   }
 
   function stepToStep(step) {
-    logHTML("Stepping to step: " + step);
+    console.log("Stepping to step: " + step);
     $(".step").hide();
     $("#"+step).show();
   }
@@ -379,8 +369,8 @@
       navigator.getUserMedia = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia);
       window.URL = window.URL || window.webkitURL;
       audioContext = new AudioContext;
-      logHTML('Audio context set up.');
-      logHTML('navigator.getUserMedia ' + (navigator.getUserMedia ? 'available.' : 'not present!'));
+      console.log('Audio context set up.');
+      console.log('navigator.getUserMedia ' + (navigator.getUserMedia ? 'available.' : 'not present!'));
       wavesurfer = Object.create(WaveSurfer);
       wavesurfer.init({
           container: '#wave',
