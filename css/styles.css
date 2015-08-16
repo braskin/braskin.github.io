@@ -211,7 +211,7 @@ footer .nav>li>a:hover {
   font-size: 1.25em;
   line-height: 1.5em;
   width:300px;
-  padding: 0 0 30px 15px;
+  padding: 0 0 30px 0;
 }
 
 .countdown {
@@ -222,7 +222,7 @@ footer .nav>li>a:hover {
   display: none;
   font-size: 10em;
   text-align: center;
-  margin-top: .3em;
+  /* margin-top: .3em; */
 }
 
 .countdown > .begin {
@@ -289,7 +289,9 @@ p, li, .or-you-can{
   margin-right: auto;
 }
 
-
+div > .row {
+  margin-right: auto;
+}
 
 /* Custom Loader CSS */
 
