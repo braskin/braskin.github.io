@@ -368,11 +368,12 @@ div > .row {
 
 /* On Air Blinker CSS */
 
+#blinker {
+    color:red;
+}
+
 
 .blink_me {
-
-    color:red;
-
     -webkit-animation-name: blinker;
     -webkit-animation-duration: 2s;
     -webkit-animation-timing-function: linear;

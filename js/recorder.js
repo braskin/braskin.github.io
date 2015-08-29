@@ -102,7 +102,6 @@
     this.storeNewStory = function(callback) {
       console.log("Storing New Story on Parse");
 
-      Parse.initialize("ujV3jLpgYwWJZiyRt6hQzrxkWduIcLb2CnycWIiN", "5tmmM8RQMgj4mi5Cf6W4pvKKW2yWti0cpgKKXluW");
       Parse.User.logIn("new_story", "new_story", {
         success: function(user) {
           console.log("LOGGEDIN");
@@ -170,7 +169,9 @@
 
       console.log("Calling wavesurfer loadblob");
 
-      wavesurfer.load(url);
+      if (audioRecorder.player) {
+        player.load(url);
+      }
 
       console.log("After Calling wavesurfer loadblob");
     }
