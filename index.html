@@ -253,9 +253,10 @@
   var player;
   var microphone;
   var visualizer;
-  var context;
+  var context = {};
   var playing;
   var clock;
+  var audioInitialized = false;
 
   function handlerStartUserMedia(stream) {
     // MEDIA STREAM SOURCE -> ZERO GAIN >
@@ -275,10 +276,13 @@
       navigator.getUserMedia = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia);
       window.URL = window.URL || window.webkitURL;
       audioContext = new AudioContext;
+      navigator.getUserMedia({video:false, audio: true}, handlerStartUserMedia, handlerErrorUserMedia);
+      audioInitialized = true;
     } catch (e) {
-     alert('No web audio support in this browser!');
+      console.log ("NO SUPPORT");
+      stepToStep("ios_alert");
+//      alert('No web audio support in this browser!');
     }
-    navigator.getUserMedia({video:false, audio: true}, handlerStartUserMedia, handlerErrorUserMedia);
   }
 
   function initializePlayer() {
@@ -311,7 +315,10 @@
       });
     }
 
-    startRecording();
+    if (audioInitialized) {
+      startRecording();
+      stepToStep('record');
+    }
   }
 
   function startRecording() {
@@ -365,10 +372,6 @@
   }
 
   function submitInfo(e) {
-    if (!context) {
-      context = {}
-    }
-
     context.userEmail = $("#userEmail").val();
     context.storyTitle = $("#storyTitle").val();
     context.userName = $("#userName").val();
@@ -417,7 +420,6 @@
   function fadeCascade(current_count) {
     if (current_count == 0) {
       prepareForRecording();
-      stepToStep('record');
     } else {
       $("#"+current_count).fadeIn("fast", function() {
         $("#"+current_count).fadeOut("fast", function() {
