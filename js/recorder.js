@@ -178,5 +178,4 @@
   };
 
   window.Recorder = Recorder;
-
 })(window);

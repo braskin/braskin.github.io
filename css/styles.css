@@ -310,7 +310,7 @@ div > .row {
 
 #loader {
   position: relative;
-  margin: 100px auto 40px auto;
+  margin: 60px auto;
   left: 0;
   right: 0;
   top: 50%;
@@ -420,4 +420,3 @@ div > .row {
     50% { opacity: 0.0; }
     100% { opacity: 1.0; }
 }
-
