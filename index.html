@@ -1,453 +1,260 @@
-<head>
+<!doctype html>
+<html>
+  <head>
     <meta charset="utf-8">
-    <title>Section scroller one-page template</title>
-    <meta name="description" content="recorder app" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Codeply">
-    
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
-    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
-    <link href="http://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" rel="stylesheet" />
-    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
-    
-    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.1.32.min.js"></script>
-    <script type="text/javascript">
-      // See the Configuring section to configure credentials in the SDK
-      AWS.config.update({accessKeyId: 'AKIAIYAMUFYEPYZNLLCQ', secretAccessKey: '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'});
-      AWS.config.region = 'us-east-1';
-    </script>
-    <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.4.2.min.js"></script>
-<!--    <script type="text/javascript" src="js/parse.js"></script> -->
-    <script type="text/javascript">
-      Parse.initialize("ujV3jLpgYwWJZiyRt6hQzrxkWduIcLb2CnycWIiN", "5tmmM8RQMgj4mi5Cf6W4pvKKW2yWti0cpgKKXluW");
-    </script>
-    <link rel="stylesheet" href="css/flipclock.css">
-    <link rel="stylesheet" href="css/styles.css" />
-    
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API Reference</title>
+
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight, .highlight .w {
+  color: #f8f8f2;
+  background-color: #272822;
+}
+.highlight .err {
+  color: #272822;
+  background-color: #f92672;
+}
+.highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #f4bf75;
+}
+.highlight .nt {
+  color: #f4bf75;
+}
+.highlight .o, .highlight .ow {
+  color: #f8f8f2;
+}
+.highlight .p, .highlight .pi {
+  color: #f8f8f2;
+}
+.highlight .gi {
+  color: #a6e22e;
+}
+.highlight .gd {
+  color: #f92672;
+}
+.highlight .gh {
+  color: #66d9ef;
+  background-color: #272822;
+  font-weight: bold;
+}
+.highlight .k, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kv {
+  color: #ae81ff;
+}
+.highlight .kc {
+  color: #fd971f;
+}
+.highlight .kt {
+  color: #fd971f;
+}
+.highlight .kd {
+  color: #fd971f;
+}
+.highlight .s, .highlight .sb, .highlight .sc, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .s1 {
+  color: #a6e22e;
+}
+.highlight .sr {
+  color: #a1efe4;
+}
+.highlight .si {
+  color: #cc6633;
+}
+.highlight .se {
+  color: #cc6633;
+}
+.highlight .nn {
+  color: #f4bf75;
+}
+.highlight .nc {
+  color: #f4bf75;
+}
+.highlight .no {
+  color: #f4bf75;
+}
+.highlight .na {
+  color: #66d9ef;
+}
+.highlight .m, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mb, .highlight .mx {
+  color: #a6e22e;
+}
+.highlight .ss {
+  color: #a6e22e;
+}
+    </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all.js"></script>
   </head>
 
-
-<body>
-
-<!-- Header Navigation bar -->    
-<nav class="navbar navbar-trans navbar-fixed-top" role="navigation">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapsible">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand text-danger" href="#">StorySlam</a>
+  <body class="index" data-languages="[&quot;ruby&quot;,&quot;python&quot;]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" alt="Navbar" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+      <img src="images/logo.png" alt="Logo" />
+        <div class="lang-selector">
+              <a href="#" data-language-name="ruby">ruby</a>
+              <a href="#" data-language-name="python">python</a>
         </div>
-        <div class="navbar-collapse collapse" id="navbar-collapsible">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#" data-toggle="modal" data-target="#myModal"><i class="fa fa-heart-o fa-lg"></i></a></li>
-            </ul>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
         </div>
-    </div>
-</nav>
-
-
-
-<section class="container-fluid" id="section1">
-
-    <!-- submit Info section --> 
-    <div class="v-center step submit" id="info" style="display:block;">
-        <h1 class="text-center">Record Your Story</h1>
-        <div class="row">
-            <div class="lato centered-list center-block">
-                 <div class="lato centered-list2 center-block">
-                    <ol class="">
-                        <li class="instructions">Add your Details</li>
-                        <li class="instructions">Click Record</li>
-                        <li class="instructions">Tell Your Story</li>
-                    </ol>
-                 </div>   
-
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="lato centered-list center-block">
-                <div class="lato centered-list2 center-block">
-                <div class="form-group">
-                    <div class="input-group input-group-lg">
-                      <input type="text" class="form-control" id="userName" placeholder="Your first & last name" aria-describedby="basic-addon1" size="50">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="input-group input-group-lg">
-                        <input type="text" class="form-control" id="userEmail" placeholder="Email address" aria-describedby="basic-addon1" size="50">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="input-group input-group-lg">
-                      <input type="text" class="form-control" id="storyTitle" placeholder="Story Title" aria-describedby="basic-addon1" size="50">
-                    </div>
-                </div>
-              </div>  
-            </div>
-        </div>
-    
-        <div class="row">
-            <div class="lato centered-list center-block">    
-                <button type="button" class="btn btn-danger btn-lg btn-huge latocenter-block lato center-block record-your-story" onclick="submitInfo()">
-                    <i class="fa fa-microphone fa-circle"></i> Record Your Story
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Countdown Section -->    
-    <div class="v-center step" id="countdown" style="display:none">
-        <h3 class="text-center" id="greeting">Hi Jane Goodall</h3>
-        <h1 class="text-center">Time to Tell Your Story</h1>
-        <div class="row">
-            <div class="lato centered-list center-block">
-              <div class="countdown">
-                  <div id="4">3</div>
-                  <div id="3">2</div>
-                  <div id="2">1</div>
-                  <div class="begin" id="1" >Let's begin at the beginning...</div>
-              </div>
-            </div>        
-        </div>
-    </div>
-
-
-    <!-- Record Section -->    
-    <div class="v-center step" id="record" style="display:none">
-        <h1 id="blinker" class="text-center">Waiting for Microphone</h1>
-        <p class="descripter text-center">You can take up to 15 minutes to tell your story. Have Fun!</p>
-
-          <div class="container center-block">
-            <div class="row center-block">
-              <div class="col-md-4"></div>
-              <div class="record_countdown col-md-4 center-block"></div>
-              <div class="col-md-4"></div>
-            </div>
-          </div>
-
-          <div class="container center-block">
-            <div class="row center-block">
-               <div id="visualizer" style="text-align: center-block;"></div>
-            </div>
-          </div>
-
-         <div class="row">
-            <div class="lato centered-list center-block">
-                <div class="lato centered-list2 center-block">
-                   <button type="button" class="btn btn-danger btn-lg btn-huge latocenter-block lato center-block verify-button" onclick="stopRecording(this);">
-                      <i class="fa fa-stop fa-circle"></i> Stop
-                    </button>
-                </div>   
-            </div>
-        </div>
-    </div>
-
-<!-- Verify Section --> 
-    
-    <div id="verify" class="v-center step" style="display:none;">
-      <div class="col-md-6 col-md-offset-3">
-        <h1 class="text-center">Review & Upload Your Story</h1>
-        <div id="player">
-          <div id="wave" style="text-align: center;"></div>
-          <div class="controls" style="text-align: center;">
-            
-            <button class="btn btn-success btn-lg btn-huge latocenter-block lato center-block verify-button" data-action="play" onclick="playPauseAudio(this);">
-                <i class="fa fa-play"></i>
-                Play
-                /
-                <i class="fa fa-pause"></i>
-                Pause
-            </button>
-
-            <button class="btn btn-primary btn-lg btn-huge latocenter-block lato center-block data-action verify-button" data-action="record" onclick="submitAll();">
-                <i class="fa fa-cloud-upload"></i>
-                Upload & Submit
-            </button>
-            
-            <div class="center-block or-you-can">Or you can ...</div>
-            
-            <button class="btn btn-danger btn-lg btn-huge latocenter-block lato center-block verify-button" data-action="record" onclick="reRecord();">
-                <i class="glyphicon glyphicon-record"></i>
-                Record Again
-            </button>      
-
-          </div>
-        </div>
-
-        <ul id="recordingslist"></ul>
-        <br>
-<!--         <button  class="btn btn-default" onclick="submitAll();">Submit</button>
-        <br>
-        <button  class="btn btn-default" onclick="reRecord();">Record Again</button>
- -->
+        <ul class="search-results"></ul>
+      <div id="toc">
       </div>
     </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id="introduction">Introduction</h1>
 
-<!-- Uploading Section --> 
+<p>Welcome to the Gearbox Capital API! You can use our API to send us leads.</p>
 
-  <div id="upload" class="row v-center step" style="display: none;">
-    <div class="col-md-6 col-md-offset-3">
-      <h1 class="text-center">Uploading your Story</h1>
-      <p class="text-center descripter">This may take a few minutes. Please don't close your browser until you see our confirmation screen.</p>
-      <br>
+<p>You can view code examples in the dark area to the right.</p>
 
-<!-- Fancy loader -->
-      <div id="loader">
-        <ul class="loader-ul">
-          <li class="loader-li"></li>
-          <li class="loader-li"></li>
-          <li class="loader-li"></li>
-          <li class="loader-li"></li>
-          <li class="loader-li"></li>
-          <li class="loader-li"></li>
-        </ul>
+<h1 id="authentication">Authentication</h1>
+
+<p>Gearbox Capital uses API keys to allow access to the API. Please contact your account manager to receive your API key.</p>
+
+<p>Gearbox Capital expects for the API key to be included in all API requests to the server as a parameter that looks like the following:</p>
+
+<p><code class="prettyprint">?api_key=a38bc3999d32a</code></p>
+
+<aside class="notice">
+You must replace <code>a38bc3999d32a</code> with your personal API key.
+</aside>
+
+<h1 id="leads">Leads</h1>
+
+<h2 id="send-us-a-lead">Send us a lead</h2>
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'net/http'</span>
+<span class="nb">require</span> <span class="s1">'json'</span>
+
+<span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="ss">:api_key</span> <span class="o">=&gt;</span> <span class="s1">'a38bc3999d32a'</span><span class="p">,</span>
+  <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="s1">'some_email@some_domain.com'</span><span class="p">,</span>
+  <span class="ss">:phone</span> <span class="o">=&gt;</span> <span class="s1">'+13473069638'</span><span class="p">,</span>
+  <span class="ss">:first_name</span> <span class="o">=&gt;</span> <span class="s1">'Jonathan'</span><span class="p">,</span>
+  <span class="ss">:last_name</span> <span class="o">=&gt;</span> <span class="s1">'Foer'</span><span class="p">,</span>
+  <span class="ss">:business_name</span> <span class="o">=&gt;</span> <span class="s1">'Illumination Incorporated'</span>
+<span class="p">}</span>
+
+<span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s1">'http://api.gearboxcapital.com/leads'</span><span class="p">)</span>
+<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Post</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">)</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">set_form_data</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span>
+
+<span class="n">res</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">start</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">hostname</span><span class="p">,</span> <span class="n">uri</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span> <span class="p">{</span><span class="o">|</span><span class="n">http</span><span class="o">|</span>
+  <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="n">parsed_body</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">res</span><span class="p">.</span><span class="nf">body</span><span class="p">)</span>
+
+</code></pre><pre class="highlight python"><code><span class="kn">import</span> <span class="nn">urllib</span>
+<span class="kn">import</span> <span class="nn">urllib2</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s">'http://api.gearboxcapital.com/leads'</span>
+
+<span class="n">values</span> <span class="o">=</span> <span class="p">{</span> <span class="s">'api_key'</span> <span class="p">:</span> <span class="s">'a38bc3999d32a'</span><span class="p">,</span> <span class="s">'first_name'</span> <span class="p">:</span> <span class="s">'Jonathan'</span><span class="p">,</span> <span class="s">'last_name'</span> <span class="p">:</span> <span class="s">'Foer'</span><span class="p">,</span> <span class="s">'email'</span> <span class="p">:</span> <span class="s">'some_email@some_domain.com'</span><span class="p">,</span> <span class="s">'phone'</span> <span class="p">:</span> <span class="s">'+13473069638'</span><span class="p">,</span> <span class="s">'business_name'</span> <span class="p">:</span> <span class="s">'Illumination Incorporated'</span> <span class="p">}</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">urlencode</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+<span class="n">request</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">Request</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+
+<span class="n">parsed_data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+</code></pre>
+<blockquote>
+<p>If the request succeeded the above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint receives a lead.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST http://api.gearboxcapital.com/leads</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>email</td>
+<td>true</td>
+<td>Email of the lead</td>
+</tr>
+<tr>
+<td>phone</td>
+<td>true</td>
+<td>Phone number of the lead</td>
+</tr>
+<tr>
+<td>first_name</td>
+<td>false</td>
+<td>First Name</td>
+</tr>
+<tr>
+<td>last_name</td>
+<td>false</td>
+<td>Last Name</td>
+</tr>
+<tr>
+<td>business_name</td>
+<td>false</td>
+<td>Business Name</td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+Remember — you need to include the API key given to you by your account manager as a parameter for the authentication to work.
+</aside>
+
+          <h1 id="errors">Errors</h1>
+
+<p>The Gearbox Capital API uses the following error codes:</p>
+
+<table><thead>
+<tr>
+<th>Error Code</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>400</td>
+<td>Bad Request &ndash; Required parameters are missing from your request</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorized &ndash; Your API key is wrong</td>
+</tr>
+<tr>
+<td>404</td>
+<td>You are accessing the wrong end point</td>
+</tr>
+</tbody></table>
+
       </div>
-<!-- End Fancy loader -->
-
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="ruby">ruby</a>
+                <a href="#" data-language-name="python">python</a>
+          </div>
+      </div>
     </div>
-  </div>
-
-
-<!-- Story Submitted Section --> 
-
-  <div id="confirm" class="v-center row step" style="display: none;">
-    <div class="col-md-6 col-md-offset-3">
-      <h1 class="text-center ">Story Submitted</h1>
-      <p class="text-center descripter">Congrats! Your story was submitted successfully. You can always be in touch with us at <a href="mailto:partners@storyslam.com">partners@storyslam.com.</a></p>
-      <img class="headphone img-responsive center-block" src="img/headphone-icon-small.png">
-    </div>
-  </div>
-
-
-<!-- iOS alert Page --> 
-
- <div id="ios_alert" class="v-center row step" style="display: none;">
-    <div class="col-md-6 col-md-offset-3">
-      <h1 class="text-center alert-header">Whoops!</h1>
-      <img class="sign-warning-icon img-responsive center-block" src="img/sign-warning-icon.png">
-      <p class="text-center descripter">Unfortunatly Apple doesn't allow audio recording from a web browser on an Iphone. But you can record your story from your laptop. If your still having questions just email us at <a href="mailto:partners@storyslam.com">partners@storyslam.com.</a></p>
-    </div>
-  </div>
-
-
-<!-- Fucking Log Section --> 
-
-</section>
-
-
-<script>
-  // function logHTML(e, data) {
-//    log.innerHTML += "\n" + e + " " + (data || '');
-  // }
-
-  var audioContext;
-  var audioRecorder;
-  var _realAudioInput;
-  var _realStream;
-  var player;
-  var microphone;
-  var visualizer;
-  var context = {};
-  var playing;
-  var clock;
-  var audioInitialized = false;
-
-  function handlerStartUserMedia(stream) {
-    // MEDIA STREAM SOURCE -> ZERO GAIN >
-    _realStream = stream;
-    _realAudioInput = audioContext.createMediaStreamSource(stream);
-    audioRecorder = new Recorder(_realAudioInput);
-    startRecording();
-  }
-  function handlerErrorUserMedia(e) {
-    console.log("No live audio input");
-    console.log("HERE WE CAN REDIRECT TO FAIL PAGE");
-  }
-
-  function initializeAudioRecorder() {
-    try {
-      window.AudioContext = window.AudioContext || window.webkitAudioContext || window.mozAudioContext;
-      navigator.getUserMedia = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia);
-      window.URL = window.URL || window.webkitURL;
-      audioContext = new AudioContext;
-      navigator.getUserMedia({video:false, audio: true}, handlerStartUserMedia, handlerErrorUserMedia);
-      audioInitialized = true;
-    } catch (e) {
-      console.log ("NO SUPPORT");
-      stepToStep("ios_alert");
-//      alert('No web audio support in this browser!');
-    }
-  }
-
-  function initializePlayer() {
-      player = Object.create(WaveSurfer);
-      player.init({
-          container: '#wave',
-          waveColor: 'yellow',
-          progressColor: 'green',
-          cursorWidth: 3,
-          cursorColor: 'white',
-          fillParent: true
-      });
-      audioRecorder.player = player;
-  }
-
-  function prepareForRecording(button) {
-    if (clock) {
-      clock.setTime(900);
-    }
-
-    if(!audioRecorder) {
-      initializeAudioRecorder();
-    }
-
-    if (!clock) {
-      clock = $('.record_countdown').FlipClock(900, {
-        countdown: true,
-        clockFace: 'MinuteCounter',
-        autoStart: false
-      });
-    }
-
-    if (audioInitialized) {
-      startRecording();
-      stepToStep('record');
-    }
-  }
-
-  function startRecording() {
-    if (audioRecorder) {
-      audioRecorder.record();
-      $(blinker).text('Recording');
-      $(blinker).addClass('blink_me');
-      clock.start()
-    }
-  }
-
-  function stopRecording(button) {
-    if(!audioRecorder)
-      return;
-    if (audioRecorder && !audioRecorder.player) {
-      initializePlayer();
-    }
-
-    audioRecorder && audioRecorder.stop();
-    stepToStep("verify");
-  }
-
-  function reRecord(e) {
-    $(recordingslist).empty();
-    startRecordCountdown();
-  }
-
-  function submitAll(e) {
-    audioRecorder.userEmail = context.userEmail;
-    audioRecorder.storyTitle = context.storyTitle;
-    audioRecorder.userName = context.userName;
-
-    audioRecorder.uploadAudioToStorage(function() {
-      audioRecorder.storeNewStory(function(status, object) {
-        console.log(status);
-        console.log(object);
-        stepToStep("confirm");
-      })
-    });
-    stepToStep("upload");        
-  }
-
-  function playPauseAudio(button) {
-    player.playPause.bind(player)();
-  }
-
-  function stopPlaybackIfPlaying() {
-    if (player && player.isPlaying()) {
-      player.stop();
-    }
-  }
-
-  function submitInfo(e) {
-    context.userEmail = $("#userEmail").val();
-    context.storyTitle = $("#storyTitle").val();
-    context.userName = $("#userName").val();
-    storeLead(context);
-
-    $("#greeting").text("Hi " + context.userName);
-    startRecordCountdown();
-  }
-
-  function stepToStep(step) {
-    stopPlaybackIfPlaying();
-    console.log("Stepping to step: " + step);
-    $(".step").hide();
-    $("#"+step).show();
-  }
-
-
-  function storeLead(context) {
-    console.log("Storing New Lead on Parse");
-    try {
-      Parse.User.logIn("new_story", "new_story", {
-        success: function(user) {
-          console.log("LOGGEDIN");
-          var Story = Parse.Object.extend("Lead");
-          var storyObject = new Story();
-            storyObject.save({storyTitle: context.storyTitle, userEmail: context.userEmail, userName: context.userName}, {
-            success: function(object) {
-              console.log("Stored successfully")
-            },
-            error: function(model, error) {
-              console.log("Failed To Store");
-            }
-          });
-        },
-        error: function(user, error) {
-          // The login failed. Check error to see why.
-        }
-      });
-    } catch (e) {
-      console.log("GOT Exception storing lead");
-      console.log(e);      
-    }
-  }
-
-
-  function fadeCascade(current_count) {
-    if (current_count == 0) {
-      prepareForRecording();
-    } else {
-      $("#"+current_count).fadeIn("fast", function() {
-        $("#"+current_count).fadeOut("fast", function() {
-          fadeCascade(current_count-1);
-        });
-      });
-    }
-  }
-
-  function startRecordCountdown() {
-    stepToStep('countdown');
-    fadeCascade(4); 
-  }
-
-
-  window.onload = function init() {
-
-  };
-
-  </script>
-
-
-
-<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>   
-
-<script src="js/recorder.js"></script>
-<script src="js/wavesurfer.min.js"></script>
-<script src="js/wavesurfer.microphone.min.js"></script>
-<script src="js/flipclock.min.js"></script>
-</body>
+  </body>
+</html>
