@@ -116,7 +116,7 @@
       <div class="content">
         <h1 id="introduction">Introduction</h1>
 
-<p>Welcome to the Gearbox Capital API! You can use our API to send us leads.</p>
+<p>Welcome to the Gearbox Capital API! You can use our API to send Gearbox Capital leads and query the current status of leads previously sent.</p>
 
 <p>You can view code examples in the dark area to the right.</p>
 
@@ -134,7 +134,7 @@ You must replace <code>a38bc3999d32a</code> with your personal API key.
 
 <h1 id="leads">Leads</h1>
 
-<h2 id="send-us-a-lead">Send us a lead</h2>
+<h2 id="send-a-lead-to-gearbox-capital">Send a lead to Gearbox Capital</h2>
 <pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'net/http'</span>
 <span class="nb">require</span> <span class="s1">'json'</span>
 
@@ -175,10 +175,11 @@ You must replace <code>a38bc3999d32a</code> with your personal API key.
 <p>If the request succeeded the above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="w">
+  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"lead_id"</span><span class="p">:</span><span class="s2">"new_lead_id"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint receives a lead.</p>
+<p>This endpoint creates a new lead.</p>
 
 <h3 id="http-request">HTTP Request</h3>
 
@@ -254,6 +255,140 @@ You must replace <code>a38bc3999d32a</code> with your personal API key.
 <td>Requested Maturity (Repayment Time)</td>
 </tr>
 </tbody></table>
+
+<aside class="success">
+Remember — you need to include the API key given to you by your account manager as a parameter for the authentication to work.
+</aside>
+
+<h2 id="get-lead-state">Get Lead State</h2>
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'net/http'</span>
+<span class="nb">require</span> <span class="s1">'json'</span>
+
+<span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s1">'https://api.gearboxcapital.com/leads/some_lead_id?api_key=a38bc3999d32a'</span><span class="p">)</span>
+
+<span class="n">res</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">start</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">uri</span><span class="p">.</span><span class="nf">port</span><span class="p">,</span> <span class="ss">:use_ssl</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">http</span><span class="o">|</span>
+  <span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="p">.</span><span class="nf">new</span> <span class="n">uri</span>
+  <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="k">end</span>
+
+<span class="n">parsed_body</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">res</span><span class="p">.</span><span class="nf">body</span><span class="p">)</span>
+
+</code></pre><pre class="highlight python"><code><span class="kn">import</span> <span class="nn">urllib</span>
+<span class="kn">import</span> <span class="nn">urllib2</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s">'https://api.gearboxcapital.com/leads/some_lead_id?api_key=a38bc3999d32a'</span>
+<span class="n">request</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">Request</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+
+<span class="n">parsed_data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+
+</code></pre>
+<blockquote>
+<p>If the request succeeded the above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"lead_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"some_lead_id"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"state"</span><span class="p">:</span><span class="w">  </span><span class="s2">"approved"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint returns the current state of a lead. The response is in JSON format.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET http://api.gearboxcapital.com/leads/some_lead_id</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<p>No parameters are required. &lsquo;some_lead_id&rsquo; in the request URL needs to be replaced with the lead ID returned when the lead was initially created.</p>
+
+<h3 id="valid-lead-states">Valid Lead States</h3>
+
+<table><thead>
+<tr>
+<th>Lead State</th>
+<th>Description of State</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>submitted</td>
+<td>Lead was submitted</td>
+</tr>
+<tr>
+<td>in_progress</td>
+<td>Lead is currently being processed</td>
+</tr>
+<tr>
+<td>financed</td>
+<td>Lead has been financed</td>
+</tr>
+<tr>
+<td>failed</td>
+<td>Lead has rejected financing</td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+Remember — you need to include the API key given to you by your account manager as a parameter for the authentication to work.
+</aside>
+
+<h2 id="export-leads">Export Leads</h2>
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'net/http'</span>
+<span class="nb">require</span> <span class="s1">'json'</span>
+
+<span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s1">'https://api.gearboxcapital.com/leads?api_key=a38bc3999d32a'</span><span class="p">)</span>
+
+<span class="n">res</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">start</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">uri</span><span class="p">.</span><span class="nf">port</span><span class="p">,</span> <span class="ss">:use_ssl</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">http</span><span class="o">|</span>
+  <span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="p">.</span><span class="nf">new</span> <span class="n">uri</span>
+  <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="k">end</span>
+
+<span class="n">parsed_body</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">res</span><span class="p">.</span><span class="nf">body</span><span class="p">)</span>
+
+</code></pre><pre class="highlight python"><code><span class="kn">import</span> <span class="nn">urllib</span>
+<span class="kn">import</span> <span class="nn">urllib2</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s">'https://api.gearboxcapital.com/leads?api_key=a38bc3999d32a'</span>
+<span class="n">request</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">Request</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+
+<span class="n">parsed_data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+
+</code></pre>
+<blockquote>
+<p>If the request succeeded the above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"lead_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"some_lead_id"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"state"</span><span class="p">:</span><span class="w">  </span><span class="s2">"approved"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="w">  </span><span class="s2">"some_email@some_domain.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"phone"</span><span class="p">:</span><span class="w">  </span><span class="s2">"+13473069638"</span><span class="p">,</span><span class="w">    
+    </span><span class="nt">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jonathan"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"last_name"</span><span class="p">:</span><span class="w">  </span><span class="s2">"Foer"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"business_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Illumination Incorporated"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"lead_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"some_lead_id"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"state"</span><span class="p">:</span><span class="w">  </span><span class="s2">"failed"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="w">  </span><span class="s2">"some_other_email@some_domain.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"phone"</span><span class="p">:</span><span class="w">  </span><span class="s2">"+19083074838"</span><span class="p">,</span><span class="w">    
+    </span><span class="nt">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Severus"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"last_name"</span><span class="p">:</span><span class="w">  </span><span class="s2">"Snape"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"business_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wizards Guild"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<p>This endpoint allows the export of leads previously sent to Gearbox Capital. The response is in JSON format.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET http://api.gearboxcapital.com/leads</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<p>No parameters are required. All leads will be returned.</p>
 
 <aside class="success">
 Remember — you need to include the API key given to you by your account manager as a parameter for the authentication to work.
