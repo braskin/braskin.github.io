@@ -254,6 +254,16 @@ You must replace <code>a38bc3999d32a</code> with your personal API key.
 <td>false</td>
 <td>Requested Maturity (Repayment Time)</td>
 </tr>
+<tr>
+<td>source</td>
+<td>false</td>
+<td>Lead Source (For Tracking)</td>
+</tr>
+<tr>
+<td>segment</td>
+<td>false</td>
+<td>Lead Segment (For Tracking)</td>
+</tr>
 </tbody></table>
 
 <aside class="success">
@@ -290,6 +300,11 @@ Remember — you need to include the API key given to you by your account manage
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"lead_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"some_lead_id"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"state"</span><span class="p">:</span><span class="w">  </span><span class="s2">"approved"</span><span class="w">
+  </span><span class="s2">"email"</span><span class="err">:</span><span class="w">  </span><span class="s2">"some_email@some_domain.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"phone"</span><span class="p">:</span><span class="w">  </span><span class="s2">"+13473069638"</span><span class="p">,</span><span class="w">    
+  </span><span class="nt">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jonathan"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"last_name"</span><span class="p">:</span><span class="w">  </span><span class="s2">"Foer"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"business_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Illumination Incorporated"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>This endpoint returns the current state of a lead. The response is in JSON format.</p>
